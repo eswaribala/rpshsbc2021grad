@@ -1,0 +1,74 @@
+select concat('myname is',name) as name from classicmodels.employee;
+
+"INSERT INTO tablename (col_name, col_date) VALUE ('DATE: Auto CURDATE()', CURDATE() )";
+insert into transaction values(1,curdate());
+
+insert into transaction values(1,now());
+
+insert into classicmodels.transaction values(3,date_format('2009-4-4','%Y%m%d'));
+
+"INSERT INTO tablename (col_name, col_date) VALUES ('DATE: Manual Date', '2008-7-04')";
+
+SELECT DATE_FORMAT( your_date_field, '%M %e, %Y, %l:%i%p') as newdate FROM your_table; 
+
+SELECT DATE_FORMAT('2008-12-07', '%W %e %M %Y') from dual;
+
+select * from classicmodels.employee where datediff(curdate(),DOJ)/365>20;
+
+SELECT TIMESTAMPDIFF(HOUR,curdate(),'2013-01-01 00:00:00');
+
+select ifnull(name,'hCl') from employee
+SELECT DATEDIFF('2007-12-31 23:59:59','2007-12-30');
+
+mysql> SELECT '2008-12-31 23:59:59' + INTERVAL 1 SECOND;
+        -> '2009-01-01 00:00:00'
+mysql> SELECT INTERVAL 1 DAY + '2008-12-31';
+        -> '2009-01-01'
+mysql> SELECT '2005-01-01' - INTERVAL 1 SECOND;
+        -> '2004-12-31 23:59:59'
+mysql> SELECT DATE_ADD('2000-12-31 23:59:59',
+    ->                 INTERVAL 1 SECOND);
+        -> '2001-01-01 00:00:00'
+mysql> SELECT DATE_ADD('2010-12-31 23:59:59',
+    ->                 INTERVAL 1 DAY);
+        -> '2011-01-01 23:59:59'
+mysql> SELECT DATE_ADD('2100-12-31 23:59:59',
+    ->                 INTERVAL '1:1' MINUTE_SECOND);
+        -> '2101-01-01 00:01:00'
+mysql> SELECT DATE_SUB('2005-01-01 00:00:00',
+    ->                 INTERVAL '1 1:1:1' DAY_SECOND);
+        -> '2004-12-30 22:58:59'
+mysql> SELECT DATE_ADD('1900-01-01 00:00:00',
+    ->                 INTERVAL '-1 10' DAY_HOUR);
+        -> '1899-12-30 14:00:00'
+mysql> SELECT DATE_SUB('1998-01-02', INTERVAL 31 DAY);
+        -> '1997-12-02'
+mysql> SELECT DATE_ADD('1992-12-31 23:59:59.000002',
+    ->            INTERVAL '1.999999' SECOND_MICROSECOND);
+        -> '1993-01-01 00:00:01.000001'
+
+mysql> SELECT DATE_FORMAT('2009-10-04 22:23:00', '%W %M %Y');
+        -> 'Sunday October 2009'
+mysql> SELECT DATE_FORMAT('2007-10-04 22:23:00', '%H:%i:%s');
+        -> '22:23:00'
+mysql> SELECT DATE_FORMAT('1900-10-04 22:23:00',
+    ->                 '%D %y %a %d %m %b %j');
+        -> '4th 00 Thu 04 10 Oct 277'
+mysql> SELECT DATE_FORMAT('1997-10-04 22:23:00',
+    ->                 '%H %k %I %r %T %S %w');
+        -> '22 22 10 10:23:00 PM 22:23:00 00 6'
+
+
+mysql> SELECT DATE_FORMAT('1999-01-01', '%X %V');
+        -> '1998 52'
+mysql> SELECT DATE_FORMAT('2006-06-00', '%d');
+        -> '00'
+
+mysql> SELECT EXTRACT(YEAR FROM '2009-07-02');
+       -> 2009
+mysql> SELECT EXTRACT(YEAR_MONTH FROM '2009-07-02 01:02:03');
+       -> 200907
+mysql> SELECT EXTRACT(DAY_MINUTE FROM '2009-07-02 01:02:03');
+       -> 20102
+mysql> SELECT EXTRACT(MICROSECOND
+    ->                FROM '2003-01-02 10:30:00.000123'

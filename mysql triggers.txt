@@ -1,0 +1,52 @@
+CREATE TABLE `employees` (
+  `employeeNumber` int(11) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `extension` varchar(10) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `officeCode` varchar(10) NOT NULL,
+  `reportsTo` int(11) default NULL,
+  `jobTitle` varchar(50) NOT NULL,
+  PRIMARY KEY  (`employeeNumber`)
+)
+
+
+Now you want to keep the changes of employee's data in another table whenever data of an employee's record changed. In order to do so you create a new table called employees_audit  to keep track the changes.
+
+
+CREATE TABLE employees_audit ( 
+id int(11) NOT NULL AUTO_INCREMENT, 
+employeeNumber int(11) NOT NULL, 
+lastname varchar(50) NOT NULL, 
+
+changedon datetime DEFAULT NULL, 
+action varchar(50) DEFAULT NULL, 
+PRIMARY KEY (id) 
+) 
+
+
+In order to keep track the changes of last name of employee we can create a trigger that is fired before we make any update on the employees table.  Here is the source code of the trigger
+
+
+DELIMITER $$
+
+USE `classicmodels`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `classicmodels`.`before_employee_update`
+BEFORE UPDATE ON `classicmodels`.`hclemp`
+FOR EACH ROW
+BEGININSERT INTO classicmodels.employees_audit SET action = 'update',employeeNumber = OLD.employeeNumber,lastname = OLD.lastname,changedon = NOW();END$$
+
+
+
+You can test the trigger which created by updating last name of any employee in employees table. Suppose we update last name of employee which has employee number is 3:
+
+UPDATE employees
+SET lastName = 'Phan'
+WHERE employeeNumber = 1056
+
+
+SELECT * 
+FROM employees_audit

@@ -1,0 +1,253 @@
+CREATE USER user IDENTIFIED BY password
+CREATE USER ‘dbadmin’@‘localhost’ IDENTIFIED BY ‘CrEate-User’;
+CREATE USER ‘superadmin’@’%’ IDENTIFIED ‘Secured’;
+
+CREATE USER ‘mysqladmin’@’%.mysqltutorial.org’ IDENTIFIED ‘SecurePass704’;
+
+select * from mysql.user;
+
+INSERT INTO user (host,user,password)
+VALUES('localhost','dbadmin',PASSWORD(‘CrEate-User’));
+
+
+USE mysql;
+
+UPDATE user 
+SET password = PASSWORD('Secret1970')
+WHERE user = 'mysqltutorial' AND 
+      host = 'mysqltutorial.org';
+      
+FLUSH PRIVILEGES;
+SET PASSWORD FOR 'mysqltutorail'@'mysqltutorial.org' = PASSWORD('Secret1970')
+
+
+
+
+GRANT privileges (column_list)
+ON [object_type] privilege_level
+TO account [IDENTIFIED BY 'password']
+[REQUIRE encryption]
+WITH with_options
+
+
+
+CREATE USER 'super'@'localhost' IDENTIFIED BY 'SecurePass1';
+
+GRANT ALL ON *.* TO 'super'@'localhost' WITH GRANT OPTION;
+
+
+
+CREATE USER 'super2'@'%' IDENTIFIED BY 'SecurePass2';
+
+GRANT ALL classicmodels.* TO 'super2'@'%' WITH GRANT OPTION;
+
+
+
+GRANT SELECT, UPDATE, DELETE ON  classicmodels.* TO 'rfc'@'localhost';
+
+REVOKE UPDATE, DELETE ON classicmodels.*  FROM 'rfc'@'localhost';
+
+
+
+
+
+Here is the table that lists all the available privileges in MySQL
+ 
+
+
+Privilege
+
+Description
+
+
+
+
+ALL [PRIVILEGES]
+
+Grant all privileges at specified access level except GRANT OPTION
+
+
+
+ALTER
+
+Allow to use of ALTER TABLE statement
+
+
+
+ALTER ROUTINE
+
+Allow user to alter or drop stored routine
+
+
+
+CREATE
+
+Allow user to create database and table
+
+
+
+CREATE ROUTINE
+
+Allow user to create stored routine
+
+
+
+CREATE TABLESPACE
+
+Allow user to create, alter or drop tablespaces and log file groups
+
+
+
+CREATE TEMPORARY TABLES
+
+Allow user to create temporary table by using CREATE TEMPORARY TABLE
+
+
+
+CREATE USER
+
+Allow user to use the CREATE USER, DROP USER, RENAME USER, and REVOKE ALL PRIVILEGES statements.
+
+
+
+CREATE VIEW
+
+Allow user to create or modify view
+
+
+
+DELETE
+
+Allow user to use DELETE
+
+
+
+DROP
+
+Allow user to drop database, table and view
+
+
+
+EVENT
+
+Allow user to schedule events in Event Scheduler
+
+
+
+EXECUTE
+
+Allow user to execute stored routines
+
+
+
+FILE
+
+Allow user to read any file in the database directory.
+
+
+
+GRANT OPTION
+
+Allow user to have privileges to grant or revoke privileges from other accounts
+
+
+
+INDEX
+
+Allow user to create or remove indexes.
+
+
+
+INSERT
+
+Allow user to use INSERT statement
+
+
+
+LOCK TABLES
+
+Allow user to use LOCK TABLES on tables for which you have the SELECT privilege
+
+
+
+PROCESS
+
+Allow user to see all processes with SHOW PROCESSLIST statement.
+
+
+
+PROXY
+
+Enable user proxying
+
+
+
+REFERENCES
+
+Not implemented
+
+
+
+RELOAD
+
+Allow user to use FLUSH operations
+
+
+
+REPLICATION CLIENT
+
+Allow user to query to see where master or slave servers are
+
+
+
+REPLICATION SLAVE
+
+Allow user to use replicate slaves to read binary log events from the master.
+
+
+
+SELECT
+
+Allow user to use SELECT statement
+
+
+
+SHOW DATABASES
+
+Allow user to show all databases
+
+
+
+SHOW VIEW
+
+Allow user to use SHOW CREATE VIEW statement
+
+
+
+SHUTDOWN
+
+Allow user to use mysqladmin shutdown command
+
+
+
+SUPER
+
+Allow user to use other administrative operations such as CHANGE MASTER TO, KILL, PURGE BINARY LOGS, SET GLOBAL, and mysqladmin command
+
+
+
+TRIGGER
+
+Allow user to use TRIGGER operations.
+
+
+
+UPDATE
+
+Allow user to use UPDATE statement
+
+
+
+USAGE
+
+Equivalent to “no privileges”

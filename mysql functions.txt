@@ -1,0 +1,16 @@
+CREATE DEFINER=`root`@`localhost` FUNCTION `hello`(s CHAR(20)) RETURNS char(50) CHARSET latin1
+BEGIN
+RETURN CONCAT('Hello, ',s,'!');
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `remarks`(in_marks int) RETURNS varchar(20) CHARSET latin1
+BEGIN
+DECLARE long_status VARCHAR(20); 
+    IF in_marks > 91 THEN 
+    SET long_status='Excellent';   
+    ELSEIF in_marks >=75 and in_marks<=90  THEN  
+    SET long_status='Good';
+    ELSEIF in_marks >=60 and in_marks<75  THEN   
+    SET long_status='Average';  
+    END IF; 
+    return long_status;
+    END

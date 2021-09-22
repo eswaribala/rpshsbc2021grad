@@ -1,0 +1,8 @@
+CREATE DATABASE classicmodels;
+SHOW DATABASES;
+
+USE database_name;
+
+CREATE DATABASE IF NOT EXISTS temp_database;
+SHOW DATABASES;
+DROP DATABASE IF EXISTS temp_database;

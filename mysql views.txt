@@ -1,0 +1,62 @@
+By definition, a database view or view is a virtual or logical table which is composed of result set of a SELECT query. Because the database view is similar to the database table which consists of row and column so you can retrieve and update data on it in the same way with table. The database view is dynamic because it is not related to the physical schema. Database view is stored as view definition as SELECT statements. When the tables which are the source data of a view changes; the data in the view change also.
+ 
+Views Advantages
+ 
+Database views provide several advantages as follows:
+ ¦Simplify complex query. A view is defined by an SQL statement with join on many underlying tables with complex business logic. The view now can be used to hides the complexity of underlying tables to the end users and external applications. Only simple SQL statement is used to work with view.
+¦Limited access data to the specific users. You may don’t want a subset of sensitive data can be retrievable by all users (both human and applications). You can use view to expose what data to which user to limit the access.
+¦Provide extra security. Security is vital parts of any relational database management system.Views provide extra security the database management system. View allows you to create only read-only view to expose read-only data to specific user. User can only retrieve data in read-only view but cannot update it.
+¦Computed column. The database table should not have the calculated columns in it so you can use views to create computed columns. Suppose in the orderDetails table you have quantityOrder (number of ordered product) and priceEach (price per product item) columns but it does not have computed column to get the total cost for each line of order. In this case, you can create computed column call total which is equal to quantityOrder multiple with priceEach to storedthe computed result.
+¦Backward compatibility. You have a center database and all applications use that database as their sources of data. One day you redesign the database to make it more clean and normalized. You then move the entire legacy data into the new database but you don’t want affect the legacy application in accessing it. In this case, you can use views to make them like the legacy database schema and return the same data so the legacy application won’t be affected.
+
+
+
+CREATE VIEW SalePerOrder
+   AS 
+  SELECT orderNumber,
+  SUM  (quantityOrdered * priceEach) total
+  FROM orderDetails
+  GROUP by orderNumber
+  ORDER BY total DESC
+
+SELECT total 
+FROM salePerOrder
+WHERE orderNumber = 10102
+
+
+CREATE VIEW officeInfo
+ AS 
+   SELECT officeCode, phone, city
+   FROM offices
+
+SELECT * FROM officeInfo
+
+UPDATE officeInfo
+ SET phone = '+33 14 723 5555'
+ WHERE officeCode = 4
+
+
+
+CREATE VIEW organization
+   AS 
+    SELECT CONCAT (E.lastname,E.firstname) AS Employee,
+           CONCAT  (M.lastname,M.firstname) AS Manager
+    FROM employees AS E
+    INNER JOIN employees AS M 
+        ON M.employeeNumber = E.ReportsTo
+    ORDER BY Manager
+
+
+ALTER VIEW organization
+  AS 
+  SELECT CONCAT(E.lastname,E.firstname) AS Employee,
+         E.email AS  employeeEmail,
+         CONCAT(M.lastname,M.firstname) AS Manager
+  FROM employees AS E
+  INNER JOIN employees AS M
+    ON M.employeeNumber = E.ReportsTo
+  ORDER BY Manager
+
+
+DROP VIEW IF EXISTS organization
+

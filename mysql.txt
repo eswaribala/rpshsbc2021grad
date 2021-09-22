@@ -1,0 +1,102 @@
++LOAD DATA INFILE 'D:/CSVfiles/product.csv' INTO TABLE classicmodels.product
+  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+
+Sequence
+
+CREATE TABLE  classicmodels.insect
+     (
+     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     PRIMARY KEY (id),
+     name VARCHAR(30) NOT NULL, 
+     date DATE NOT NULL,
+     origin VARCHAR(30) NOT NULL 
+);
+
+ALTER TABLE classicmodels.insect AUTO_INCREMENT =500;
+
+INSERT INTO insect (id,name,date,origin) VALUES
+    (NULL,'housefly','2001-09-10','kitchen'),
+     (NULL,'millipede','2001-09-10','driveway'),
+     (NULL,'grasshopper','2001-09-10','front yard');
+create table student (rollno int not null, class varchar(4) not null,
+section varchar(2),name varchar(30),CONSTRAINT pk1 Primary key(rollno,class,section));
+
+CREATE TABLE classicmodels.Customer(
+Cust_ID int,
+Cust_Last_Name VarChar(20),
+Cust_Mid_Name VarChar(4),
+Cust_First_Name VarChar(20),
+Account_No int, 
+Account_Type VarChar(25) ,
+Bank_Branch VarChar(25) ,
+Cust_Email VarChar(30),
+CONSTRAINT pk1 PRIMARY KEY(Account_NO));
+
+create table Person (PersonId int, name varchar(25), Age int, Constraint chk1 check(Age<125));
+
+create table test1224(eecode integer, eename varchar(25),eemail varchar(25),
+constraint unq unique(eemail));
+
+CREATE TABLE parent (id INT NOT NULL,
+                     PRIMARY KEY (id)
+) ;
+CREATE TABLE child (id INT, parent_id INT,
+                      FOREIGN KEY (parent_id) REFERENCES parent(id)
+                     
+) ;
+
+create table bank (branchid int, name varchar(25), address varchar(25), constraint pk12 primary key(branchid));
+
+create table customer(customerid int, name varchar(25), cbranchid int,
+
+constraint pk22 primary key(customerid),
+constraint fk22 foreign key(cbranchid) references bank(branchid));
+
+create table HCLEmployee(EmployeeId int primary key,EmployeeName varchar(25),ProjectId int,
+Constraint fk1 Foreign key(ProjectId) references Project(ProjectId));
+
+
+
+
+
+
+CREATE TABLE product (category INT NOT NULL, id INT NOT NULL,
+                      price DECIMAL,
+                      PRIMARY KEY(category, id)) ENGINE=INNODB;
+CREATE TABLE customer (id INT NOT NULL,
+                       PRIMARY KEY (id)) ENGINE=INNODB;
+CREATE TABLE product_order (no INT NOT NULL AUTO_INCREMENT,
+                            product_category INT NOT NULL,
+                            product_id INT NOT NULL,
+                            customer_id INT NOT NULL,
+                            PRIMARY KEY(no),
+                            INDEX (product_category, product_id),
+                            FOREIGN KEY (product_category, product_id)
+                              REFERENCES product(category, id)
+                              ON UPDATE CASCADE ON DELETE RESTRICT,
+                            INDEX (customer_id),
+                            FOREIGN KEY (customer_id)
+                              REFERENCES customer(id)) ENGINE=INNODB;
+
+
+Ecommerce
+create table Customer(Customer_Id BIGINT NOT NULL AUTO_INCREMENT, Age SMALLINT, Email Varchar(150), Name Varchar(100), Category Varchar(30),
+Constraint Customer_Id_PK Primary Key(Customer_Id),
+Constraint Email_UK Unique(Email),
+INDEX (Customer_Id,Name)
+);
+create table Item(Item_Id BIGINT NOT NULL AUTO_INCREMENT, Name Varchar(100), Cost BIGINT, Sale_Price BIGINT, Category Varchar(30),
+Constraint Item_Id_PK Primary Key(Item_Id)
+);
+
+Create Table OrderLine(Order_Line_Id BIGINT NOT NULL AUTO_INCREMENT,
+Quantity BIGINT, 
+Item_Id BIGINT,
+Constraint Order_Line_Id_PK Primary Key(Order_Line_Id),
+Constraint Item_Id_FK Foreign Key(Item_Id) References Item(Item_Id));
+
+LOAD DATA INFILE 'G:/customer.csv' INTO TABLE Customer 
+  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n' IGNORE 1 LINES;
+
